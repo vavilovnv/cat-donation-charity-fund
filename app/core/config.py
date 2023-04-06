@@ -12,7 +12,7 @@ class Settings(BaseSettings):
     first_superuser_password: Optional[str] = None
 
     class Config:
-        env_file: '.env'
+        env_file = '.env'
 
 
 settings = Settings()
