@@ -19,9 +19,9 @@ class CharityProjectCreate(CharityProjectUpdate):
     full_amount: int = Field(..., gt=0)
 
     @validator('name', 'description')
-    def none_and_empty_not_allowed(cls, value: str):
-        if not value or value is None:
-            raise ValueError('Все поля обязательны для заполнения.')
+    def check_value_is_empty(cls, value: str):
+        if value is None or not value:
+            raise ValueError('Поля обязательны для заполнения.')
         return value
 
 
