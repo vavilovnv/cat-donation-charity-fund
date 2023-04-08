@@ -19,7 +19,7 @@ async def check_project_name_is_exist(
     if id and id != project_id:
         raise HTTPException(
             status_code=HTTPStatus.BAD_REQUEST,
-            detail='Проект с таким именем уже существует'
+            detail='Проект с таким именем уже существует!'
         )
 
 async def check_project_is_exist(
@@ -46,7 +46,7 @@ def check_money_amount(obj, new_amount=None):
     elif invested > 0:
         raise HTTPException(
             status_code=HTTPStatus.BAD_REQUEST,
-            detail='Нельзя удалить проект с внесенными инвестициями'
+            detail='В проект были внесены средства, не подлежит удалению!'
         )
     return obj
 
@@ -55,5 +55,5 @@ def check_project_is_closed(obj):
     if obj.fully_invested:
         raise HTTPException(
             status_code=HTTPStatus.BAD_REQUEST,
-            detail='Запрещено редактирование закрытого проекта'
+            detail='Закрытый проект нельзя редактировать!'
         )
