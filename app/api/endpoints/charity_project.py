@@ -9,6 +9,7 @@ from app.api.validators import (
 )
 from app.api.utils import investing_process
 from app.core.db import get_async_session
+from app.core.user import current_superuser
 from app.crud.charity_project import charity_project_crud
 from app.schemas.charity_project import CharityProjectCreate, CharityProjectDB, CharityProjectUpdate
 
@@ -29,7 +30,8 @@ async def get_all_charity_projects(
 @router.post(
     '/',
     response_model=CharityProjectDB,
-    response_model_exclude_none=True
+    response_model_exclude_none=True,
+    dependencies=[Depends(current_superuser)]
 )
 async def create_charity_project(
     charity_project: CharityProjectCreate,
@@ -47,8 +49,9 @@ async def create_charity_project(
 @router.delete(
     '/{project_id}',
     response_model=CharityProjectDB,
+    dependencies=[Depends(current_superuser)]
 )
-async def delete_charityproject(
+async def delete_charity_project(
     project_id: int,
     session: AsyncSession = Depends(get_async_session)
 ):
@@ -61,6 +64,7 @@ async def delete_charityproject(
 @router.patch(
     '/{project_id}',
     response_model=CharityProjectDB,
+    dependencies=[Depends(current_superuser)]
 )
 async def partially_update_project(
     project_id: int,
