@@ -1,13 +1,13 @@
 from datetime import datetime
 from typing import Optional
 
-from pydantic import BaseModel, Extra, Field, validator
+from pydantic import BaseModel, Extra, Field, PositiveInt
 
 
 class CharityProjectUpdate(BaseModel):
     name: str = Field(None, min_length=1, max_length=100)
     description: str = Field(None, min_length=1)
-    full_amount: int = Field(None, gt=0)
+    full_amount: Optional[PositiveInt]
 
     class Config:
         extra = Extra.forbid
@@ -16,13 +16,7 @@ class CharityProjectUpdate(BaseModel):
 class CharityProjectCreate(CharityProjectUpdate):
     name: str = Field(..., min_length=1, max_length=100)
     description: str = Field(..., min_length=1)
-    full_amount: int = Field(..., gt=0)
-
-    @validator('name', 'description')
-    def check_value_is_empty(cls, value: str):
-        if value is None or not value:
-            raise ValueError('Поля обязательны для заполнения.')
-        return value
+    full_amount: PositiveInt
 
 
 class CharityProjectDB(CharityProjectCreate):

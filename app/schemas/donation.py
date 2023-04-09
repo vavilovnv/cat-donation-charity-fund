@@ -1,11 +1,11 @@
 from datetime import datetime
 from typing import Optional
 
-from pydantic import BaseModel, Extra, Field
+from pydantic import BaseModel, Extra, PositiveInt
 
 
 class DonationCreate(BaseModel):
-    full_amount: int = Field(..., gt=0)
+    full_amount: PositiveInt
     comment: Optional[str]
 
     class Config:
