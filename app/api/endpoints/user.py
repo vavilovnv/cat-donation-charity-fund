@@ -25,7 +25,7 @@ router.include_router(
 @router.delete(
     '/users/{id}',
     tags=['users'],
-    deprecated=True
+    deprecated=True,
 )
 def delete_user(id: str):
     raise HTTPException(
