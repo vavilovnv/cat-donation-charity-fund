@@ -7,7 +7,7 @@ class Settings(BaseSettings):
     app_title: str = 'API QRKot'
     app_desc: str = 'Сервис учета пожертвований на котиков'
     database_url: str = 'sqlite+aiosqlite:///./fastapi.db'
-    secret: str
+    secret: str = 'any_secret'
     first_superuser_email: Optional[EmailStr] = None
     first_superuser_password: Optional[str] = None
 
