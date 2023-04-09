@@ -10,7 +10,6 @@ from app.crud.donation import donation_crud
 from app.models.user import User
 from app.schemas.donation import DonationCreate, DonationDB, DonationView
 
-
 router = APIRouter()
 
 

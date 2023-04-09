@@ -22,6 +22,7 @@ async def check_project_name_is_exist(
             detail='Проект с таким именем уже существует!'
         )
 
+
 async def check_project_is_exist(
     project_id: int,
     session: AsyncSession
