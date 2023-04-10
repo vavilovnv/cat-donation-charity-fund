@@ -4,7 +4,7 @@ from typing import Optional
 from pydantic import BaseModel, Extra, PositiveInt
 
 
-class DonationCreate(BaseModel):
+class DonationBase(BaseModel):
     full_amount: PositiveInt
     comment: Optional[str]
 
@@ -12,7 +12,11 @@ class DonationCreate(BaseModel):
         extra = Extra.forbid
 
 
-class DonationView(DonationCreate):
+class DonationCreate(DonationBase):
+    pass
+
+
+class DonationView(DonationBase):
     id: int
     create_date: datetime
 

@@ -1,1 +1,8 @@
-Generic single-database configuration with an async dbapi.
+Available templates:
+* multidb - Rudimentary multi-database configuration.
+* async - Generic single-database configuration with an async dbapi.
+* generic - Generic single-database configuration.
+* pylons - Configuration that reads from a Pylons project environment.
+
+Template used:
+* async - generic single-database configuration with an async dbapi.

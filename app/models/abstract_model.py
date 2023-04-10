@@ -5,7 +5,7 @@ from sqlalchemy import Boolean, CheckConstraint, Column, DateTime, Integer
 from app.core.db import Base
 
 
-class AbstractModel(Base):
+class CharityBase(Base):
     __abstract__ = True
     __table_args__ = (
         CheckConstraint('invested_amount >= 0'),

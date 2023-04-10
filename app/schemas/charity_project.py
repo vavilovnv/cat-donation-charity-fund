@@ -4,27 +4,33 @@ from typing import Optional
 from pydantic import BaseModel, Extra, Field, PositiveInt
 
 
-class CharityProjectUpdate(BaseModel):
-    name: str = Field(None, min_length=1, max_length=100)
-    description: str = Field(None, min_length=1)
+class CharityProjectBase(BaseModel):
+    name: str = Field(None, max_length=100)
+    description: Optional[str]
     full_amount: Optional[PositiveInt]
+
+    class Config:
+        min_anystr_length = 1
+
+
+class CharityProjectCreate(CharityProjectBase):
+    name: str = Field(..., max_length=100)
+    description: str
+    full_amount: PositiveInt
+
+
+class CharityProjectUpdate(CharityProjectBase):
 
     class Config:
         extra = Extra.forbid
 
 
-class CharityProjectCreate(CharityProjectUpdate):
-    name: str = Field(..., min_length=1, max_length=100)
-    description: str = Field(..., min_length=1)
-    full_amount: PositiveInt
-
-
-class CharityProjectDB(CharityProjectCreate):
+class CharityProjectDB(CharityProjectBase):
     id: int
-    invested_amount: int
-    fully_invested: bool
-    create_date: datetime
+    invested_amount: Optional[int]
+    create_date: Optional[datetime]
     close_date: Optional[datetime]
+    fully_invested: Optional[bool]
 
     class Config:
         orm_mode = True
